@@ -71,7 +71,7 @@ class Formatter
       domain = nil if TagManager.instance.local_domain?(domain)
       account = Account.find_remote(username, domain)
 
-      account.nil? ? match : mention_html(match, account)
+      account.nil? ? match : mention_html(match, account, domain)
     end
   end
 
@@ -95,15 +95,8 @@ class Formatter
     "#{prefix}<a href=\"#{tag_url(affix.downcase)}\" class=\"mention hashtag\">#<span>#{affix}</span></a>"
   end
 
-  def get_underline_color(url)
-    instance_url = url.split('@').first
-    hash = Digest::MD5.hexdigest(instance_url)
-    hash[0..5]
-  end
-
-  def mention_html(match, account)
-    url = TagManager.instance.url_for(account)
-    style = "border-bottom: 1px solid #{get_underline_color(url)};"
-    "#{match.split('@').first}<a href=\"#{url}\" class=\"h-card u-url p-nickname mention\" style=\"#{style}\">@<span>#{account.username}</span></a>"
+  def mention_html(match, account, domain)
+    style = "background-color: 1px solid #{Digest::MD5.hexdigest(domain)[0..5]};"
+    "#{match.split('@').first}<a href=\"#{TagManager.instance.url_for(account)}\" class=\"h-card u-url p-nickname mention ping\"><span style=\"#{style}\">@</span><span>#{account.username}</span></a>"
   end
 end
