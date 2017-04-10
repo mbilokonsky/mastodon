@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require 'singleton'
+require 'digest/md5' 
 
 class Formatter
   include Singleton
@@ -94,7 +95,15 @@ class Formatter
     "#{prefix}<a href=\"#{tag_url(affix.downcase)}\" class=\"mention hashtag\">#<span>#{affix}</span></a>"
   end
 
+  def get_underline_color(url) {
+    instance_url = url.split('@').first
+    hash = Digest::MD5.hexdigest(instance_url)
+    hash[0..5]
+  }
+
   def mention_html(match, account)
-    "#{match.split('@').first}<a href=\"#{TagManager.instance.url_for(account)}\" class=\"h-card u-url p-nickname mention\">@<span>#{account.username}</span></a>"
+    url = TagManager.instance.url_for(account)
+    style = "border-bottom: 1px solid #{get_underline_color(url)};"
+    "#{match.split('@').first}<a href=\"#{url}\" class=\"h-card u-url p-nickname mention\" style=\"#{style}\">@<span>#{account.username}</span></a>"
   end
 end
