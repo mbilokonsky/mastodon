@@ -95,10 +95,16 @@ class Formatter
     "#{prefix}<a href=\"#{tag_url(affix.downcase)}\" class=\"mention hashtag\">#<span>#{affix}</span></a>"
   end
 
+  def get_underline_color(url) {
+    instance_url = url.split('@').first
+    hash = Digest::MD5.hexdigest(instance_url)
+    hash[0..5]
+  }
+
   def mention_html(match, account)
     url = TagManager.instance.url_for(account)
     domain = url.split("/@").first
     color = Digest::MD5.hexdigest(domain)[0..5]
-    "#{match.split('@').first}<a data-instance-color=\"#{color}\" href=\"#{url}\" class=\"h-card u-url p-nickname mention ping\"><span class=\"at\">@</span><span>#{account.username}</span></a>"
+    "#{match.split('@').first}<a data-instance-color=\"#{color}\" href=\"#{url}\" class=\"h-card u-url p-nickname mention\"><span class=\"at\">@</span><span>#{account.username}</span></a>"
   end
 end
