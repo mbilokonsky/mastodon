@@ -71,7 +71,7 @@ class Formatter
       domain = nil if TagManager.instance.local_domain?(domain)
       account = Account.find_remote(username, domain)
 
-      account.nil? ? match : mention_html(match, account, domain)
+      account.nil? ? match : mention_html(match, account)
     end
   end
 
