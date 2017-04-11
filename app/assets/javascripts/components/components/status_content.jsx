@@ -41,8 +41,8 @@ const StatusContent = React.createClass({
 
       if (mention) {
         link.addEventListener('click', this.onMentionClick.bind(this, mention), false);
-        let color = mention.getAttribute('data-instance-color');
-        mention.find('.at').setAttribute('style', `background-color: #${color};`);
+        let color = link.getAttribute('data-instance-color');
+        link.querySelector('.at').setAttribute('style', `background-color: #${color};`);
       } else if (link.textContent[0] === '#' || (link.previousSibling && link.previousSibling.textContent && link.previousSibling.textContent[link.previousSibling.textContent.length - 1] === '#')) {
         link.addEventListener('click', this.onHashtagClick.bind(this, link.text), false);
       } else if (media) {
