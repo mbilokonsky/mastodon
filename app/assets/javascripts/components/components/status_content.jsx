@@ -6,11 +6,6 @@ import { isRtl } from '../rtl';
 import { FormattedMessage } from 'react-intl';
 import Permalink from './permalink';
 
-const style_links = content => {
-  console.log('style links', content);
-  return content;
-}
-
 const StatusContent = React.createClass({
 
   contextTypes: {
@@ -42,7 +37,10 @@ const StatusContent = React.createClass({
       if (mention) {
         link.addEventListener('click', this.onMentionClick.bind(this, mention), false);
         let color = link.getAttribute('data-instance-color');
-        link.querySelector('.at').setAttribute('style', `background-color: #${color};`);
+        if (color) {
+          link.setAttribute('style', `border-bottom: 1px solid #${color};`);
+        }
+        
       } else if (link.textContent[0] === '#' || (link.previousSibling && link.previousSibling.textContent && link.previousSibling.textContent[link.previousSibling.textContent.length - 1] === '#')) {
         link.addEventListener('click', this.onHashtagClick.bind(this, link.text), false);
       } else if (media) {
@@ -98,7 +96,7 @@ const StatusContent = React.createClass({
     const { status } = this.props;
     const { hidden } = this.state;
 
-    const content = { __html: emojify(style_links(status.get('content'))).replace(/\n/g, '') };
+    const content = { __html: emojify(status.get('content')).replace(/\n/g, '') };
     const spoilerContent = { __html: emojify(escapeTextContentForBrowser(status.get('spoiler_text', ''))) };
     const directionStyle = { direction: 'ltr' };
 
