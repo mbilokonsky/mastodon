@@ -6,6 +6,11 @@ import { isRtl } from '../rtl';
 import { FormattedMessage } from 'react-intl';
 import Permalink from './permalink';
 
+const style_links = content => {
+  console.log('style links', content);
+  return content;
+}
+
 const StatusContent = React.createClass({
 
   contextTypes: {
@@ -28,7 +33,7 @@ const StatusContent = React.createClass({
   componentDidMount () {
     const node  = ReactDOM.findDOMNode(this);
     const links = node.querySelectorAll('a');
-
+    
     for (var i = 0; i < links.length; ++i) {
       let link    = links[i];
       let mention = this.props.status.get('mentions').find(item => link.href === item.get('url'));
@@ -36,8 +41,6 @@ const StatusContent = React.createClass({
 
       if (mention) {
         link.addEventListener('click', this.onMentionClick.bind(this, mention), false);
-        const instance_color = link.getAttribute('data-instance-color');
-        link.style = { borderBottom: `1px solid ${instance_color};` }
       } else if (link.textContent[0] === '#' || (link.previousSibling && link.previousSibling.textContent && link.previousSibling.textContent[link.previousSibling.textContent.length - 1] === '#')) {
         link.addEventListener('click', this.onHashtagClick.bind(this, link.text), false);
       } else if (media) {
@@ -93,7 +96,7 @@ const StatusContent = React.createClass({
     const { status } = this.props;
     const { hidden } = this.state;
 
-    const content = { __html: emojify(status.get('content')).replace(/\n/g, '') };
+    const content = { __html: emojify(style_links(status.get('content'))).replace(/\n/g, '') };
     const spoilerContent = { __html: emojify(escapeTextContentForBrowser(status.get('spoiler_text', ''))) };
     const directionStyle = { direction: 'ltr' };
 
