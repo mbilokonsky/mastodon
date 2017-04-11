@@ -99,6 +99,6 @@ class Formatter
     url = TagManager.instance.url_for(account)
     domain = url.split("/@").first
     color = Digest::MD5.hexdigest(domain)[0..5]
-    "#{match.split('@').first}<a href=\"#{url}\" class=\"h-card u-url p-nickname mention ping\"><span style=\"background-color=\##{color};\">@</span><span>#{account.username}</span></a>"
+    "#{match.split('@').first}<a data-instance-color=\"#{color}\" href=\"#{url}\" class=\"h-card u-url p-nickname mention ping\"><span class=\"at\">@</span><span>#{account.username}</span></a>"
   end
 end
