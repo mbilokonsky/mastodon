@@ -5,6 +5,7 @@ import emojify from '../emoji';
 import { isRtl } from '../rtl';
 import { FormattedMessage } from 'react-intl';
 import Permalink from './permalink';
+import md5 from 'md5';
 
 function getContrastYIQ(hexcolor) {
   var r = parseInt(hexcolor.substr(0,2),16);
@@ -21,11 +22,9 @@ function getColorHash(url) {
     let username = parts[1];
 
     if (instance_name) {
-      
+      return md5(instance_name).substr(0, 6);
     }
   }
-
-  return "FF0000";
 }
 
 const StatusContent = React.createClass({
@@ -59,7 +58,7 @@ const StatusContent = React.createClass({
       if (mention) {
         link.addEventListener('click', this.onMentionClick.bind(this, mention), false);
         link.setAttribute('title', mention.get('acct'));
-        console.log('acct', mention.get('acct'));
+        console.log('acct', mention.get('instance'));
         let url = link.getAttribute('href');
         let color = getColorHash(url);
         if (color) {
