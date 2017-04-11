@@ -8,8 +8,8 @@ en:
     closed_registrations: Registrations are currently closed on this instance.
     contact: Contact
     description_headline: What is %{domain}?
-    domain_count_after: other instances
-    domain_count_before: Connected to
+    domain_count_after: other earths
+    domain_count_before: In contact with
     features:
       api: Open API for apps and services
       blocks: Rich block and muting tools
@@ -24,8 +24,8 @@ en:
     links: Links
     other_instances: Other earths
     source_code: Source code
-    status_count_after: articulations of self
-    status_count_before: Who have expressed
+    status_count_after: odd statements
+    status_count_before: Who've made
     terms: Terms
     user_count_after: weirdos
     user_count_before: Home to
