@@ -41,7 +41,7 @@ const StatusContent = React.createClass({
           link.setAttribute('style', `border-radius: 5px; border-left: 10px solid #${color}; border-bottom: 1px solid #${color};`);
           link.setAttribute('title', link.getAttribute('href'));
 
-          let at = link.find('.at');
+          let at = link.querySelector('.at');
           if (at) {
             at.setAttribute('style', `background-color: #${color};`);
           }
