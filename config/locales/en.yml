@@ -22,12 +22,12 @@ en:
     features_headline: What sets Mastodon apart
     get_started: Get started
     links: Links
-    other_instances: Other instances
+    other_instances: Other earths
     source_code: Source code
-    status_count_after: statuses
-    status_count_before: Who authored
+    status_count_after: articulations of self
+    status_count_before: Who have expressed
     terms: Terms
-    user_count_after: users
+    user_count_after: weirdos
     user_count_before: Home to
   accounts:
     follow: Follow
