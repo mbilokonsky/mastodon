@@ -36,6 +36,8 @@ const StatusContent = React.createClass({
 
       if (mention) {
         link.addEventListener('click', this.onMentionClick.bind(this, mention), false);
+        const instance_color = link.getAttribute('data-instance-color');
+        link.style = { borderBottom: `1px solid ${instance_color};` }
       } else if (link.textContent[0] === '#' || (link.previousSibling && link.previousSibling.textContent && link.previousSibling.textContent[link.previousSibling.textContent.length - 1] === '#')) {
         link.addEventListener('click', this.onHashtagClick.bind(this, link.text), false);
       } else if (media) {
