@@ -98,7 +98,7 @@ class Formatter
   def mention_html(match, account)
     url = TagManager.instance.url_for(account)
     domain = url.split("/@").first
-    style = "background-color: ##{Digest::MD5.hexdigest(domain)[0..5]}"
+    style = "background-color: \##{Digest::MD5.hexdigest(domain)[0..5]}"
     "#{match.split('@').first}<a href=\"#{url}\" class=\"h-card u-url p-nickname mention ping\"><span style=\"#{style}\">@</span><span>#{account.username}</span></a>"
   end
 end
