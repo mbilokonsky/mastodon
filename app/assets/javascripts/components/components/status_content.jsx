@@ -6,6 +6,14 @@ import { isRtl } from '../rtl';
 import { FormattedMessage } from 'react-intl';
 import Permalink from './permalink';
 
+function getContrastYIQ(hexcolor){
+  var r = parseInt(hexcolor.substr(0,2),16);
+  var g = parseInt(hexcolor.substr(2,2),16);
+  var b = parseInt(hexcolor.substr(4,2),16);
+  var yiq = ((r*299)+(g*587)+(b*114))/1000;
+  return (yiq >= 128) ? 'black' : 'white';
+}
+
 const StatusContent = React.createClass({
 
   contextTypes: {
@@ -37,13 +45,14 @@ const StatusContent = React.createClass({
       if (mention) {
         link.addEventListener('click', this.onMentionClick.bind(this, mention), false);
         let color = link.getAttribute('data-instance-color');
+        let atColor = getContrastYIQ(color);
         if (color) {
-          link.setAttribute('style', `border-radius: 5px; border-left: 10px solid #${color}; border-bottom: 1px solid #${color};`);
+          link.setAttribute('style', `border-radius: 5px; border-left: 7px solid #${color}; border-bottom: 1px solid #${color};`);
           link.setAttribute('title', link.getAttribute('href'));
 
           let at = link.querySelector('.at');
           if (at) {
-            at.setAttribute('style', `background-color: #${color};`);
+            at.setAttribute('style', `color: ${atColor}; background-color: #${color}; border-right: 3px solid #{color};`);
           }
         }
         
