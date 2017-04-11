@@ -46,13 +46,13 @@ const StatusContent = React.createClass({
         link.addEventListener('click', this.onMentionClick.bind(this, mention), false);
         let color = link.getAttribute('data-instance-color');
         if (color) {
-          link.setAttribute('style', `border-radius: 5px; border-left: 6px solid #${color}; border-bottom: 1px solid #${color};`);
+          link.setAttribute('style', `border-radius: 5px; border-left: 6px solid #${color}; border-bottom: 1px solid #${color}; padding-right: 2px;`);
           link.setAttribute('title', link.getAttribute('href'));
 
           let at = link.querySelector('.at');
           if (at) {
             let atColor = getContrastYIQ(color);
-            at.setAttribute('style', `color: ${atColor}; background-color: #${color}; padding-right: 4px;`);
+            at.setAttribute('style', `color: ${atColor}; background-color: #${color}; padding-right: 4px; margin-right: 1px;`);
           }
         }
         
