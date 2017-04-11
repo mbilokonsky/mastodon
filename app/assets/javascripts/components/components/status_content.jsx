@@ -58,15 +58,17 @@ const StatusContent = React.createClass({
       if (mention) {
         link.addEventListener('click', this.onMentionClick.bind(this, mention), false);
         link.setAttribute('title', mention.get('acct'));
-        console.log('acct', mention.get('instance'));
         let url = link.getAttribute('href');
         let color = getColorHash(url);
         if (color) {
           link.setAttribute('style', `border-radius: 5px; border-left: 6px solid #${color}; border-bottom: 1px solid #${color}; padding-right: 2px;`);
-          let at = link.querySelector('.at');
-          if (at) {
+          let at = link.firstChild;
+          if (at.nodeValue === "@") {
             let atColor = getContrastYIQ(color);
-            at.setAttribute('style', `color: ${atColor}; background-color: #${color}; padding-right: 4px; margin-right: 1px;`);
+            let newSpan = document.createElement('span');
+            newSpan.appendChild(document.createTextNode(at.nodeValue));
+            newSpan.setAttribute('style', `color: ${atColor}; background-color: #${color}; padding-right: 4px; margin-right: 1px;`);
+            link.replaceChild(newSpan, at);
           }
         }
       } else if (link.textContent[0] === '#' || (link.previousSibling && link.previousSibling.textContent && link.previousSibling.textContent[link.previousSibling.textContent.length - 1] === '#')) {
