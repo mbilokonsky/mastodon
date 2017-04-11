@@ -38,8 +38,13 @@ const StatusContent = React.createClass({
         link.addEventListener('click', this.onMentionClick.bind(this, mention), false);
         let color = link.getAttribute('data-instance-color');
         if (color) {
-          link.setAttribute('style', `border-left: 10px solid #${color}; border-bottom: 1px solid #${color};`);
+          link.setAttribute('style', `border-radius: 5px; border-left: 10px solid #${color}; border-bottom: 1px solid #${color};`);
           link.setAttribute('title', link.getAttribute('href'));
+
+          let at = link.find('.at');
+          if (at) {
+            at.setAttribute('style', `background-color: #${color};`);
+          }
         }
         
       } else if (link.textContent[0] === '#' || (link.previousSibling && link.previousSibling.textContent && link.previousSibling.textContent[link.previousSibling.textContent.length - 1] === '#')) {
