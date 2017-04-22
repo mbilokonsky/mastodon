@@ -70,7 +70,7 @@ const StatusContent = React.createClass({
         let local = isLocal(instance_name);
         let color = getColorHash(instance_name);
         if (color) {
-          link.setAttribute('style', `border-radius: 5px; border-color: #${color}; border-left: 6px solid; border-bottom: 1px solid; ${local ? "border-right: 3px solid;" : "padding-right: 3px;"}`);
+          link.setAttribute('style', `border-radius: 5px; border-left: 6px solid #${color}; border-bottom: 1px solid #${color}; ${local ? `border-right: 3px solid #${color};` : "padding-right: 3px;"}`);
           let at = link.firstChild;
 
           // sometimes, React inserts comments before the '@' which end up as 'first child'
